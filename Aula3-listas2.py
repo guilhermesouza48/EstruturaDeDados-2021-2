@@ -1,0 +1,31 @@
+# Range () : gera faixa de números
+
+# Range () com 1 argumento : gera uma lista de números
+# que vai de zero até argumento -1
+
+for i in range (10):
+    print(i)
+
+print('-------------------//--------------------')
+
+# range () com 2 argumentos gera uma lista de números 
+# começando pelo primeiro argumento (inclusive) até
+# o segundo argumento (exclusive)
+
+for j in range (5, 15):
+    print(j)
+
+print('-------------------//--------------------')
+
+# range ( ) com três argumentos:
+# 1º: limite inferior (inclusive)
+# 2º: limite superior (exclusive)
+# 3º: passo (de quanto em quanto vai a lista irá andar)
+
+for k in range(1, 20, 3):
+    print(k)
+
+print('-------------------//--------------------')
+
+for n in range(10, 0 , -1):
+    print(n)
