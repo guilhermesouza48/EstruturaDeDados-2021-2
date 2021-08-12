@@ -7,6 +7,11 @@
 # A busca para quando o valor de busca é encontrado ou quando
 # a lista é totalmente percorrida, sem encontrar o valor de busca.
 
+# Número de comparações em uma lista de n elementos
+# Quando um elemento existe: pos +1  comparações
+# Quando um elemento não existe: n comparações
+
+from time import time
 from data.lista_nomes import nomes
 def busca_sequencial(lista, valor_busca):
     """
@@ -25,6 +30,11 @@ primos = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 6
 ]
 
 busca = 'ORKUTILSON'
+
+hora_ini = time()
+print(f"Posição de GUIZIM: {busca_sequencial(nomes, 'GUIZIM')}")
+hora_fim = time()
+print(f"Tempo gasto procurando GUIZIM: {(hora_fim - hora_ini) * 1000}ms")
 
 print(f"Posição do número 4003:{busca_sequencial(primos, 4003)}")
 print(f"Posição do número 6690:{busca_sequencial(primos, 6689)}")
