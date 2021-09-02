@@ -8,11 +8,12 @@
 # se necessário. Continua o processo, até isolar o penúltimo elemento
 # da lista.
 
+
 def selection_sort(lista):
     """
         Função que implementa o algoritmo de ordenação selection sort
     """
-    
+
     global comps, passadas, trocas
     comps = 0 
     passadas = 0
@@ -74,9 +75,13 @@ from time import time
 nomes_parcial = nomes[:30000]   # Usa apenas os primeiros 30 mil nomes
 
 ini = time()
-selection_sort(nomes_parcial)
+
 fim = time()
 
+#print(nomes_parcial)
 print(nomes_parcial)
 print(f"Tempo: {fim - ini}")
 print(f"Passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
+
+
+
