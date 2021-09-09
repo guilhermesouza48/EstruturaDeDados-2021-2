@@ -1,0 +1,66 @@
+# Dicionário é uma estrutura da  linguagem Python capaz
+# de armazenar múltiplos valores em um única vavriável,
+# por meio ded pares de chave-valor
+
+pessoa = {
+    # 'Nome' é a chave
+    # 'Fulano de  TAL' é o valor
+    "nome": "fulano de tal",
+    "sexo": "M",
+    "idade" : 39,
+    "peso" : 76,
+    'altura': 1.82, 
+}
+
+# Calculando o IMC (Indice de massa corporal)
+imc = pessoa["peso"] / (pessoa["altura"] ** 2)
+print(f"O IMC de {pessoa['nome']} é {imc}.")
+
+forma1 = {
+    "base": 7.5,
+    "altura": 12,          # Retângulo
+    "tipo": "R"
+}
+
+forma2 = {
+    "base": 6,
+    "altura": 2.5,          # Triângulo
+    "tipo": "T"
+}
+
+forma3 = {
+    "base": 5,
+    "altura": 3,          # Eclipse
+    "tipo": "E"
+}
+
+forma4 = {
+    "base": 10,
+    "altura": 5,          # Item nao reconhecivel
+    "tipo": "W"
+}
+
+forma5 = {
+    "legume":"batata",
+    "fruta":"abacate",          
+    "tipo": "T"
+}
+
+from math import pi
+
+def calcular_area(forma):
+    if forma["tipo"] == "R":          # Retângulo
+        return forma ["base"] * forma["altura"]
+    elif forma["tipo"] == "T":        # Triângulo
+        return forma["base"] * forma["altura"]/2
+    elif forma["tipo"] == "E":
+        return forma["base"] / 2 * forma["altura"] / 2 * pi 
+    else:
+        # Gerar um erro
+        raise Exception('TIPO DE FORMA NÃO RECONHECIDA.')
+
+print(f"Área de um retângulo de 7.5x12: {calcular_area(forma1)}")
+print(f"Área de um triângulo de 6x2.5: {calcular_area(forma2)}")
+print(f"Área de uma elipse de 5x3: {calcular_area(forma3)}")
+#print(f"Área de uma forma desconhecida de 10x5: {calcular_area(forma4)}")
+print(f"Área de uma forma desconhecida de ?x?: {calcular_area(forma5)}")
