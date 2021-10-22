@@ -6,7 +6,7 @@
 """
 class Node:
 
-    def _init_(self, val):
+    def __init__(self, val):
         self.data = val     # Armazena a informação do usuário
         self.next = None    # Ponteiro para o próximo nodo (None = nenhum)
 
@@ -26,7 +26,7 @@ class LinkedList:
     """
         Construtor da classe
     """
-    def _init_(self):
+    def __init__(self):
         self.__head = None      # (head = cabeça (da lista)) Ponteiro para o primeiro nodo da lista
         self.__tail = None      # (tail = calda) Ponteiro para o último nodo da lista
         self.__count = 0        # Contador de nodos
@@ -89,15 +89,88 @@ class LinkedList:
     """
     def insertBack(self, val):
         self.insert(self.__count, val)
-
+    
     """
-        Retorna o data do nodo da posição especificada
+        Retorna o campo data do nodo da posição especificada
     """
-    def peek(self,  pos):
+    def peek(self, pos):
+        # Quando a lista estiver vazia ou a posição estiver fora
+        # dos limites válidos (0..count - 1), retorna None
+        if self.is_empty() or pos < 0 or pos > self.__count - 1:
+            return None
         node = self.__head
-        
         for i in range(0, pos): node = node.next
         return node.data
+
+    """
+        Método para procurar um valor na lista e retornar sua posição.
+        Retorna - 1 caso não encontre.
+    """
+    def index(self, val):
+        node = self.__head
+        for pos in range(0, self.__count):
+            if node.data == val: return pos
+            node = node.next
+        return -1   # Não encontrou
+
+    """
+        Método para remover um elemento da lista
+    """
+    def remove(self, pos):
+        
+        # 1º caso: lista vazia ou posição fora dos limites
+        # (menor que 0 ou maior que count -1)
+        if self.__count == 0 or pos < 0 or pos > self.__count - 1:
+            return None
+
+        # 2º caso: remoção do início da lista
+        if pos == 0:
+            removed = self.__head           # Nodo removido
+            self.__head = self.__head.next  # Passa a apontar para o nodo seguinte
+
+        # 3º caso: remoções intermediárias ou finais
+        else:
+            # Percorre a lista até encontrar o item anterior
+            # à posição de remoção (before)
+            before = self.__head
+            for i in range(1, pos): before = before.next
+
+            # O removido será o sucessor do before
+            removed = before.next
+
+            # Nodo da posição seguinte à de remoção (next)
+            after = removed.next
+
+            # O nodo anterior (before) passa a apontar para o
+            # nodo seguinte (after)
+            before.next = after
+
+            # Atualizando o __tail no caso da remoção do último nodo
+            if removed == self.__tail:
+                self.__tail = before
+                # print(f"Valor do _tail: {self.__tail.data}")
+
+        self.__count -= 1
+        # Retorna o valor armazenado no nodo removido
+        return removed.data
+
+    """
+        Método para remover o primeiro nodo da lista
+    """
+    def removeHead(self):
+        return self.remove(0)
+
+    """
+        Método para remover o último nodo da lista
+    """
+    def removeTail(self):
+        return self.remove(self.__count - 1)
+
+    """
+        Método que retorna a quantidade de itens da lista
+    """
+    def count(self):
+        return self.__count
 
     """
         Método que exibe a lista como uma string (para fins de depuração)
@@ -112,24 +185,3 @@ class LinkedList:
         return "[ " + string + f" ], count: {self.__count}"
 
 ######################################################################
-
-lista = LinkedList()
-
-lista.insert(0, "1 kg batata")
-lista.insert(1, "café")
-lista.insert(2, "miojo")
-lista.insert(3, "óleo")
-lista.insert(4, "sabonete")
-lista.insert(5, "shampoo")
-
-lista.insert(4, "tomate")
-
-lista.insert(7, "sabão em pó")
-lista.insert(30, "detergente")
-
-print(lista.to_str())
-
-lista.insertFront("5kg de arroz")
-lista.insertBack("água sanitária")
-
-print(lista.to_str())
